@@ -1,28 +1,27 @@
-def particao(lista, e, d):
-    x = lista[d]
-    i = e
-    for j in range(e, d):
-        if lista[j] <= x:
-            lista[i], lista[j] = lista[j], lista[i]
+def partition(arr, l, r):
+    x = arr[r]
+    i = l
+    for j in range(l, r):
+        if arr[j] <= x:
+            arr[i], arr[j] = arr[j], arr[i]
             i += 1
-
-    lista[i], lista[d] = lista[d], lista[i]
+    arr[i], arr[r] = arr[r], arr[i]
     return i
 
 
-def mediana(lista, e, d, k):
-    if (k > 0 and k <= d - e + 1):
-        index = particao(lista, e, d)
+def median(arr, e, d, k):
+    if 0 < k <= d - e + 1:
+        index = partition(arr, e, d)
 
-        if (index - e == k - 1):
-            return lista[index]
+        if index - e == k - 1:
+            return arr[index]
 
-        if (index - e > k - 1):
-            return mediana(lista, e, index - 1, k)
+        if index - e > k - 1:
+            return median(arr, e, index - 1, k)
+        return median(arr, index + 1, d, k - index + e - 1)
 
-        return mediana(lista, index + 1, d, k - index + e - 1)
+    return float('inf')
 
-    return INT_MAX
 
 n = int(input())
 maior = -1
@@ -35,13 +34,10 @@ for i in range(n):
         maior = entrada
     if entrada < menor:
         menor = entrada
-d = n - 1
-
-tamanho = n
-
+        
 if n % 2 == 0:
-  k = n / 2
+    k = n / 2
 else:
-  k = (n + 1) / 2
+    k = (n + 1) / 2
 
-print(menor, mediana(lista, 0, d, k), maior)
+print(menor, median(lista, 0, n - 1, k), maior)
