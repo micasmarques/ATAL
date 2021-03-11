@@ -20,7 +20,7 @@ def median(arr, e, d, k):
             return median(arr, e, index - 1, k)
         return median(arr, index + 1, d, k - index + e - 1)
 
-    return float('inf')
+    return 9999999999999
 
 
 n = int(input())
@@ -34,7 +34,7 @@ for i in range(n):
         maior = entrada
     if entrada < menor:
         menor = entrada
-        
+
 if n % 2 == 0:
     k = n / 2
 else:
